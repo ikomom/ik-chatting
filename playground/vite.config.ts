@@ -1,4 +1,4 @@
-import { resolve } from 'path'
+import { resolve } from 'node:path'
 import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Components from 'unplugin-vue-components/vite'
@@ -14,7 +14,7 @@ export default defineConfig({
       configFile: resolve(__dirname, 'unocss.config.ts'),
     }),
     Components({
-      dts: './src/components.d.ts',
+      dts: './types/components.d.ts',
     }),
     AutoImport({
       imports: [
@@ -22,7 +22,7 @@ export default defineConfig({
         'vue/macros',
         '@vueuse/core',
       ],
-      dts: './src/auto-imports.d.ts',
+      dts: './types/auto-imports.d.ts',
     }),
   ],
   // build: {
