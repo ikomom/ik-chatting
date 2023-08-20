@@ -8,6 +8,8 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "socket.io-client": "^4.7.2",
+    "naive-ui": "^2.34.4"
   },
   "devDependencies": {
     "@iconify-json/carbon": "^1.1.19",
