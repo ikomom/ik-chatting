@@ -1,4 +1,4 @@
-# ws-pkg
+# ik-chatting
 
 websocket client and server
 
