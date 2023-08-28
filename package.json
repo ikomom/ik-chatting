@@ -13,6 +13,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "nest-knife4j": "^1.0.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.0",
