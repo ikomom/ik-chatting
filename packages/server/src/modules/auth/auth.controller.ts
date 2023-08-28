@@ -8,6 +8,12 @@ import { AuthService } from './auth.service'
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
+  @ApiOperation({ summary: 'login' })
+  @Post('/login')
+  async login(@Body() body: CreateUserDto) {
+    return this.authService.login(body)
+  }
+
   @ApiOperation({ summary: 'register' })
   @Post('/register')
   async register(@Body() body: CreateUserDto) {
