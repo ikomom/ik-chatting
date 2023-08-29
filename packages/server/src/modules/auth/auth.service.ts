@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import R from 'src/common/tools/response'
 import { Repository } from 'typeorm'
+import R from '../../common/tools/response'
 import { User } from '../user/entities/user.entity'
 import { CreateUserDto } from '../user/dto/create-user.dto'
 import { md5 } from '../../common/tools/utils'
