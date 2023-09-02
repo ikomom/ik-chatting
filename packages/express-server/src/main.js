@@ -30,7 +30,7 @@ io.on('connection', (socket) => {
       status: 'ok',
       code: 'xxx',
     })
-    // socket.emit('server-res', `res: ${data}`, Uint8Array.from([42, 64, 333, 444]), Uint8Array.from([12]))
+    // socket.emit('server-res', `res: ${ data}`, Uint8Array.from([42, 64, 333, 444]), Uint8Array.from([12]))
     // io.emit('server-res', `all: ${data}`)
   })
 

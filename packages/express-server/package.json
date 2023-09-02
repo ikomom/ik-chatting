@@ -2,7 +2,7 @@
   "name": "express-server",
   "version": "1.0.0",
   "scripts": {
-    "start": "nodemon src/main.js"
+    "start": "cross-env DEBUG=* nodemon src/main.js"
   },
   "devDependencies": {
     "nodemon": "latest",
