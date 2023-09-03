@@ -5,12 +5,23 @@ import Components from 'unplugin-vue-components/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import UnoCSS from 'unocss/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 export default defineConfig({
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8000',
+        changeOrigin: true,
+        rewrite: (path: string) => path.replace(/^\/api/, ''),
+      },
+    },
+  },
   plugins: [
     Vue({
       reactivityTransform: true,
     }),
+    vueJsx(),
     UnoCSS({
       configFile: resolve(__dirname, 'unocss.config.ts'),
     }),
@@ -25,8 +36,16 @@ export default defineConfig({
         '@vueuse/core',
       ],
       dts: './types/auto-imports.d.ts',
+      dirs: [
+        './src/utils',
+      ],
     }),
   ],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
   // build: {
   //   rollupOptions: {
   //     external: [

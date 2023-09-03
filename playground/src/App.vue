@@ -1,43 +1,25 @@
 <script setup lang="ts">
-import { lightTheme } from 'naive-ui'
-import { io } from 'socket.io-client'
-import { cloneDeep } from 'lodash-es'
+import { darkTheme, lightTheme } from 'naive-ui'
 
-const msg = ref('')
-const totalUser = ref(0)
-const ff = ref({ a: 'b', b: { c: 'd' } })
-console.log('cloneDeep', cloneDeep(ff.value), ff.value)
-const socket = io('ws://localhost:3000')
-
-socket.on('welcome', (msg) => {
-  console.log('hi', typeof msg)
-  totalUser.value = msg
-})
-
-socket.on('server-res', (...msg) => {
-  console.log('server-res', msg)
-})
-
-function sendMsg() {
-  console.log('msg', msg.value)
-  socket.timeout(2000).emit('chat-message', msg.value, (...response: any) => {
-    console.log(response) // ok
-  })
-  msg.value = ''
-}
+const theme = computed(() => isDark.value ? darkTheme : lightTheme)
 </script>
 
 <template>
-  <n-config-provider :theme="lightTheme">
-    <div p-4>
-      <div>总人数： {{ totalUser }}</div>
-
-      <n-input-group>
-        <n-input v-model:value="msg" />
-        <n-button type="primary" @click="sendMsg">
-          send
-        </n-button>
-      </n-input-group>
-    </div>
+  <n-config-provider h-full :theme="theme">
+    <router-view />
   </n-config-provider>
 </template>
+
+<style>
+#app {
+  height: 100vh;
+}
+html.dark {
+  background: #121212;
+  color: #ffffff;
+}
+
+input {
+  @apply dark:bg-transparent;
+}
+</style>

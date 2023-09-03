@@ -4,6 +4,7 @@ import { knife4jSetup } from 'nest-knife4j'
 import { ValidationPipe } from '@nestjs/common'
 import { AppModule } from './app.module'
 
+const port = 8000
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
@@ -25,7 +26,8 @@ async function bootstrap() {
       location: '/api-json',
     },
   ])
-  await app.listen(8000)
+  await app.listen(port)
+  console.log(`listen to ${port}`)
 }
 
 bootstrap()
