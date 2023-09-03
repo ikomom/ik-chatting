@@ -15,20 +15,23 @@ const columns: DataTableColumns = [
     title: 'Actions',
     key: 'action',
     render(row) {
+      //  <n-button type="primary">Edit</n-button>
       return (
-          <n-button
-              type="error"
-              on-click={() => {
-                const bool = confirm('delete')
-                if (bool) {
-                  deleteUser(row.id as string).then((res) => {
-                    execute()
-                  })
-                }
-              }}
-          >
-            Delete
-          </n-button>
+         <n-space>
+           <n-button
+             type="error"
+             on-click={() => {
+               const bool = confirm('delete')
+               if (bool) {
+                 deleteUser(row.id as string).then((res) => {
+                   execute()
+                 })
+               }
+             }}
+           >
+             Delete
+           </n-button>
+         </n-space>
       )
     },
   },
@@ -37,8 +40,13 @@ const columns: DataTableColumns = [
 
 <template>
   <div flex="~ col">
-    <div mb-8>
+    <div mb-2>
       User
+      <n-space>
+        <n-button type="primary" @click="execute()">
+          refresh
+        </n-button>
+      </n-space>
     </div>
     <n-data-table flex-1 :loading="isLoading" :data="state" :columns="columns" />
   </div>

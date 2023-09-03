@@ -6,8 +6,8 @@ const instance = axios.create({
 })
 
 interface Response<T = any> {
-  message?: string
-  timestamp: number
+  msg?: string
+  t: number
   code: number
   data: T
 }
