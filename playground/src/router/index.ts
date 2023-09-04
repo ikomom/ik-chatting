@@ -3,6 +3,7 @@ import nProgress from 'nprogress'
 import 'nprogress/nprogress.css' // progress bar style
 import { createRouter, createWebHistory } from 'vue-router'
 import { ALL_ROUTES } from './routes'
+import { useUserStore } from '@/stores/user'
 
 nProgress.configure({ showSpinner: false, trickleSpeed: 200 })
 
@@ -26,9 +27,13 @@ export const router = createRouter({
 //   return true
 // })
 
-router.beforeEach(() => {
-  // console.log('beforeEach')
+router.beforeEach(async (to, from) => {
   nProgress.start()
+  const { token } = useUserStore()
+  console.log('beforeEach', { to, from, token })
+
+  if (!token && to.name !== 'Auth')
+    return { name: 'Auth' }
 })
 
 router.afterEach((to, from, failure) => {

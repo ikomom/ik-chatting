@@ -12,6 +12,8 @@ interface Response<T = any> {
   data: T
 }
 
+// instance.interceptors.response.use(r => r, (error) => {})
+
 export function request<T>(config: AxiosRequestConfig) {
   return new Promise<Response<T>>((resolve, reject) => {
     instance.request<Response<T>>(config).then((response: AxiosResponse<Response<T>>) => {

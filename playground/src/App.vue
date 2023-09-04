@@ -6,7 +6,9 @@ const theme = computed(() => isDark.value ? darkTheme : lightTheme)
 
 <template>
   <n-config-provider h-full :theme="theme">
-    <router-view />
+    <n-message-provider>
+      <router-view />
+    </n-message-provider>
   </n-config-provider>
 </template>
 

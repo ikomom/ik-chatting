@@ -25,9 +25,7 @@ export const chatroomRoute: RouteRecordRaw[] = [
   {
     name: 'chatroom',
     path: '/chatroom',
-    children: [
-
-    ],
+    component: () => import('@/pages/chatroom/index.vue'),
   },
 ]
 
@@ -36,6 +34,11 @@ export const ALL_ROUTES: RouteRecordRaw[] = [
     path: '/',
     name: 'Index',
     component: () => import('@/pages/index.vue'),
+  },
+  {
+    path: '/auth',
+    name: 'Auth',
+    component: () => import('@/pages/auth/index.vue'),
   },
   ...chatroomRoute,
   ...backStageRoute,

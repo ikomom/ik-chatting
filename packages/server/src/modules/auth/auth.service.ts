@@ -23,7 +23,7 @@ export class AuthService {
     if (!user)
       return R.fail('用户名或密码错误')
 
-    return R.ok('登录成功', { user })
+    return R.ok('登录成功', { user, token: 'hhhh' })
   }
 
   async register(user: CreateUserDto) {
