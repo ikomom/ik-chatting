@@ -23,7 +23,7 @@ const columns: DataTableColumns = [
              on-click={() => {
                const bool = confirm('delete')
                if (bool) {
-                 deleteUser(row.id as string).then((res) => {
+                 deleteUser(row.id as string).then(() => {
                    execute()
                  })
                }

@@ -3,7 +3,7 @@ class R {
     return { code: 200, data, msg: message, t: new Date().getTime() }
   }
 
-  static fail<T = any>(message = '', code = 500) {
+  static fail(message = '', code = 500) {
     return { code, msg: message, t: new Date().getTime() }
   }
 }

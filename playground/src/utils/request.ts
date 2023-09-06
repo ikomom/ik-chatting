@@ -1,4 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
+import axios, { AxiosRequestConfig } from 'axios'
+import { showMessage } from '@/utils/message'
 
 const instance = axios.create({
   baseURL: '/api',
@@ -12,17 +13,25 @@ interface Response<T = any> {
   data: T
 }
 
-// instance.interceptors.response.use(r => r, (error) => {})
+instance.interceptors.response.use((response) => {
+  const { data } = response
+  if (data.code === 200) {
+    return data
+  }
+  else {
+    showMessage({ content: data.msg || '', type: 'error' })
+    throw new Error(data.msg)
+  }
+}, (error) => {
+  // console.log('error', error)
+  if (error.response.data?.message)
+    showMessage({ content: () => error.response.data?.message.map((m: string) => h('div', m)), type: 'error' })
+
+  return Promise.reject(error)
+})
 
 export function request<T>(config: AxiosRequestConfig) {
   return new Promise<Response<T>>((resolve, reject) => {
-    instance.request<Response<T>>(config).then((response: AxiosResponse<Response<T>>) => {
-      console.log(response.data)
-      const { data } = response
-      resolve(data)
-    }).catch((error: any) => {
-      // 请求失败的处理
-      reject(error)
-    })
+    instance.request<Response<T>>(config).then((response: any) => resolve(response)).catch(reject)
   })
 }

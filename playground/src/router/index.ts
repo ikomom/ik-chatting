@@ -36,7 +36,7 @@ router.beforeEach(async (to, from) => {
     return { name: 'Auth' }
 })
 
-router.afterEach((to, from, failure) => {
+router.afterEach(() => {
   // console.log('afterEach', { to, from, failure })
   nProgress.done()
 })

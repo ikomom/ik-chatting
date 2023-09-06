@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { FormInst, useMessage } from 'naive-ui'
+import { FormInst } from 'naive-ui'
 import { useUserStore } from '@/stores/user'
 import { register } from '@/apis'
+import { showMessage } from '@/utils/message'
 
 const activeTab = ref('login')
 const formRef = ref<FormInst | null>(null)
@@ -21,7 +22,7 @@ const rules = {
     trigger: ['input'],
   },
 }
-const message = useMessage()
+
 const user = useUserStore()
 console.log('user')
 function handleValidateClick(e: MouseEvent) {
@@ -30,12 +31,17 @@ function handleValidateClick(e: MouseEvent) {
     if (!errors) {
       if (activeTab.value === 'register') {
         register(formValue.value).then((res) => {
-          activeTab.value = 'login'
+          if (res.code === 200) {
+            showMessage({ content: '注册成功，请重新登录' })
+            activeTab.value = 'login'
+          }
         })
         //
       }
       else {
-        user.login(formValue.value)
+        user.login(formValue.value).then(() => {
+          showMessage({ content: '登录成功', duration: 500 })
+        })
       }
     }
   })

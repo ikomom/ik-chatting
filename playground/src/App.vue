@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { darkTheme, lightTheme } from 'naive-ui'
+import { MessageRegister } from '@/utils/message'
 
 const theme = computed(() => isDark.value ? darkTheme : lightTheme)
 </script>
@@ -8,6 +9,7 @@ const theme = computed(() => isDark.value ? darkTheme : lightTheme)
   <n-config-provider h-full :theme="theme">
     <n-message-provider>
       <router-view />
+      <MessageRegister />
     </n-message-provider>
   </n-config-provider>
 </template>
