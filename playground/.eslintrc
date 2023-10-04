@@ -1,0 +1,6 @@
+{
+  "extends": ["../.eslintrc", "@unocss"],
+  "rules": {
+    "vue/valid-attribute-name": "off"
+  }
+}

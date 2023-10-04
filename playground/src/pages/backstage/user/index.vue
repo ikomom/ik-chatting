@@ -5,7 +5,7 @@ import { deleteUser, getAllUser } from '@/apis'
 const { execute, state, isLoading } = useAsyncState(getAllUser, [])
 
 const columns: DataTableColumns = [
-  { title: 'id', key: 'id' },
+  { title: 'id', key: 'id', width: 200, ellipsis: true },
   { title: 'username', key: 'username' },
   { title: 'status', key: 'status' },
   { title: 'avatar', key: 'avatar' },

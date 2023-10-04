@@ -33,12 +33,12 @@ toMenuOptions(backStageRoute, menuOptions)
 <template>
   <n-layout h-full content-style="display: flex;flex-direction: column">
     <n-layout-header p-4>
-      <div class="layout-panel" px-4 py-3 flex items-center justify-between>
+      <div class="layout-panel" flex items-center justify-between px-4 py-3>
         BackstageLayout
-        <div text-xl flex gap-4>
+        <div flex gap-4 text-xl>
           <RouterLink to="/chatroom" i-carbon-chat-bot icon-btn />
           <a
-            icon-btn i-carbon-logo-github
+            i-carbon-logo-github icon-btn
             rel="noreferrer"
             href="https://github.com/ikomom/ik-chatting"
             target="_blank"
@@ -80,6 +80,6 @@ toMenuOptions(backStageRoute, menuOptions)
 }
 
 .layout-panel {
-  @apply bg-white dark:bg-#121212 rd-1 h-full dark:b-1 shadow-sm
+  @apply bg-white dark:bg-#121212 rd-1 h-full dark:b-1 shadow-sm overflow-auto
 }
 </style>

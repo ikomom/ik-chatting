@@ -24,7 +24,16 @@ const rules = {
 }
 
 const user = useUserStore()
-console.log('user')
+
+const tabs = [
+  { label: '登录', name: 'login' },
+  { label: '注册', name: 'register' },
+]
+
+const activeItem = computed(() => {
+  return tabs.find(item => item.name === activeTab.value)
+})
+
 function handleValidateClick(e: MouseEvent) {
   e.preventDefault()
   formRef.value?.validate((errors) => {
@@ -49,11 +58,10 @@ function handleValidateClick(e: MouseEvent) {
 </script>
 
 <template>
-  <div w-full h-full flex="~ col" items-center justify-center>
-    <div w-350px>
+  <div class="login-page" w-full h-full flex="~ col" items-center justify-center>
+    <div w-350px bg-white p="x-6 y-3" rounded="3" shadow-lg>
       <n-tabs v-model:value="activeTab" justify-content="space-evenly" mb-4>
-        <n-tab-pane name="login" tab="登录" />
-        <n-tab-pane name="register" tab="注册" />
+        <n-tab-pane v-for="item in tabs" :key="item.name" :name="item.name" :tab="item.label" />
       </n-tabs>
       <n-form
         ref="formRef"
@@ -69,7 +77,7 @@ function handleValidateClick(e: MouseEvent) {
         </n-form-item>
         <n-form-item>
           <n-button type="primary" block attr-type="button" @click="handleValidateClick">
-            验证
+            {{ activeItem?.label }}
           </n-button>
         </n-form-item>
       </n-form>
@@ -78,5 +86,8 @@ function handleValidateClick(e: MouseEvent) {
 </template>
 
 <style scoped lang="scss">
-
+.login-page {
+  background: url('@/assets/images/bg.png') no-repeat;
+  background-size: cover;
+}
 </style>
