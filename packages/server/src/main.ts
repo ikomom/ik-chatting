@@ -3,12 +3,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { knife4jSetup } from 'nest-knife4j'
 import { ValidationPipe } from '@nestjs/common'
 import { AppModule } from './app.module'
+import { HttpExceptionFilter } from './common/filters/HttpExceptionFilter'
 
 const port = 8000
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
-
-  app.useGlobalPipes(new ValidationPipe({}))
 
   // doc
   const config = new DocumentBuilder()
@@ -26,8 +25,22 @@ async function bootstrap() {
       location: '/api-json',
     },
   ])
+
+  /**
+   * filter
+   */
+  // 格式化错误
+  app.useGlobalFilters(new HttpExceptionFilter())
+  /**
+   * pipes
+   */
+  // 验证入参
+  app.useGlobalPipes(new ValidationPipe({}))
+
+  // TODO: i18n https://nestjs-i18n.com/quick-start
+  // TODO: rateLimit, compression
+
   await app.listen(port)
-  console.log(`listen to ${port}`)
 }
 
-bootstrap()
+bootstrap().then(() => console.log(`listen to ${port}`))

@@ -16,8 +16,11 @@ import { UserModule } from './modules/user/user.module'
       autoLoadEntities: true,
       synchronize: true, // 自动同步
     }),
-    AuthModule,
     UserModule,
+    {
+      module: AuthModule,
+      global: true,
+    },
   ],
 })
 export class AppModule {

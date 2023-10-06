@@ -1,10 +1,12 @@
+import { HttpException, HttpStatus } from '@nestjs/common'
+
 class R {
-  static ok<T = any>(message = '', data: T = null) {
-    return { code: 200, data, msg: message, t: new Date().getTime() }
+  static ok<T = any>(message = '', data: T = null, code = HttpStatus.OK) {
+    return { code, data, msg: message, t: new Date().getTime() }
   }
 
-  static fail(message = '', code = 500) {
-    return { code, msg: message, t: new Date().getTime() }
+  static fail(message = '', code = HttpStatus.INTERNAL_SERVER_ERROR) {
+    throw new HttpException(message, code)
   }
 }
 export default R

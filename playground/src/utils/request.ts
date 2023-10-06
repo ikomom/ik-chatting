@@ -24,8 +24,11 @@ instance.interceptors.response.use((response) => {
   }
 }, (error) => {
   // console.log('error', error)
-  if (error.response.data?.message)
-    showMessage({ content: () => error.response.data?.message.map((m: string) => h('div', m)), type: 'error' })
+  const { data } = error.response
+  if (data?.errors)
+    showMessage({ content: () => data?.errors.map((msg: string) => h('div', msg)), type: 'error', duration: 1000 })
+  else
+    showMessage({ content: data.msg || '服务器异常', type: 'error', duration: 1000 })
 
   return Promise.reject(error)
 })

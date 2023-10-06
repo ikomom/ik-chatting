@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common'
+import { Body, Controller, ParseArrayPipe, Post } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
 import { CreateUserDto } from '../user/dto/create-user.dto'
 import { AuthService } from './auth.service'
@@ -10,7 +10,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'login' })
   @Post('/login')
-  async login(@Body() body: any) {
+  async login(@Body() body: CreateUserDto) {
     return this.authService.login(body)
   }
 
@@ -18,5 +18,12 @@ export class AuthController {
   @Post('/register')
   async register(@Body() body: CreateUserDto) {
     return this.authService.register(body)
+  }
+
+  @ApiOperation({ summary: 'batch register' })
+  @Post('/register/batch')
+  createMany(@Body(new ParseArrayPipe({ items: String })) users: string[]) {
+  // createMany(@Body(ArrayValidationPipe(BatchCreateDto)) users: string[]) {
+    return this.authService.batchRegister(users)
   }
 }

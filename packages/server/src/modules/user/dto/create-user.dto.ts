@@ -1,4 +1,4 @@
-import { Length } from 'class-validator'
+import { ArrayMinSize, ArrayNotEmpty, IsArray, IsString, Length } from 'class-validator'
 
 export class CreateUserDto {
   /**
@@ -14,4 +14,16 @@ export class CreateUserDto {
    */
   @Length(6, 18)
   password: string
+}
+
+export class BatchCreateDto {
+  /**
+   * username
+   * @example ["john"]
+   */
+  @IsArray()
+  @IsString({ each: true })
+  @ArrayMinSize(1, { message: 'At least one item must be provided' })
+  @ArrayNotEmpty()
+  users: string[]
 }

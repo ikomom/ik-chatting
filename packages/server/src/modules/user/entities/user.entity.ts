@@ -1,4 +1,5 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { md5 } from '../../../common/tools/utils'
 
 @Entity()
 export class User {
@@ -8,7 +9,7 @@ export class User {
   @Column({ default: 'test' })
   username: string
 
-  @Column({ default: '123456', select: false })
+  @Column({ default: md5('123456'), select: false })
   password: string
 
   @Column({ default: 'on' })
@@ -19,6 +20,9 @@ export class User {
 
   @Column({ default: '' })
   tag: string
+
+  @Column({ default: 'user' })
+  role: string
 
   @Column({ type: 'double', default: new Date().valueOf() })
   createTime: number
