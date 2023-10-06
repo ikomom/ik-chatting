@@ -1,6 +1,6 @@
 import { Body, Controller, ParseArrayPipe, Post } from '@nestjs/common'
 import { ApiOperation, ApiTags } from '@nestjs/swagger'
-import { CreateUserDto } from '../user/dto/create-user.dto'
+import { BatchCreateDto, CreateUserDto } from '../user/dto/create-user.dto'
 import { AuthService } from './auth.service'
 
 @ApiTags('Auth')
@@ -22,8 +22,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'batch register' })
   @Post('/register/batch')
-  createMany(@Body(new ParseArrayPipe({ items: String })) users: string[]) {
-  // createMany(@Body(ArrayValidationPipe(BatchCreateDto)) users: string[]) {
+  createMany(@Body(new ParseArrayPipe({ items: BatchCreateDto })) users: string[]) {
     return this.authService.batchRegister(users)
   }
 }

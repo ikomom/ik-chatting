@@ -3,7 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { knife4jSetup } from 'nest-knife4j'
 import { ValidationPipe } from '@nestjs/common'
 import { AppModule } from './app.module'
-import { HttpExceptionFilter } from './common/filters/HttpExceptionFilter'
+import { HttpExceptionFilter } from './common/filters/httpException.filter'
 
 const port = 8000
 async function bootstrap() {

@@ -1,6 +1,6 @@
 import { Body, Controller, Delete, Get, Param, Patch, UseGuards } from '@nestjs/common'
 import { ApiTags } from '@nestjs/swagger'
-import { AuthGuard } from '../../common/guards/AuthGuard'
+import { AuthGuard } from '../../common/guards/auth.guard'
 import { UserService } from './user.service'
 import { UpdateUserDto } from './dto/update-user.dto'
 

@@ -1,15 +1,14 @@
 import type { TestingModule } from '@nestjs/testing'
 import { Test } from '@nestjs/testing'
+import { AppModule } from '../../app.module'
 import { AuthController } from './auth.controller'
-import { AuthService } from './auth.service'
 
 describe('AuthController', () => {
   let controller: AuthController
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      controllers: [AuthController],
-      providers: [AuthService],
+      imports: [AppModule],
     }).compile()
 
     controller = module.get<AuthController>(AuthController)
