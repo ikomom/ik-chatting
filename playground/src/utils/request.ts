@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios'
 import { showMessage } from '@/utils/message'
+import { useUserStore } from '@/stores/user'
 
 const instance = axios.create({
   baseURL: '/api',
@@ -12,6 +13,14 @@ interface Response<T = any> {
   code: number
   data: T
 }
+
+instance.interceptors.request.use((request) => {
+  const { token } = useUserStore()
+  if (token)
+    request.headers.Authorization = token
+
+  return request
+})
 
 instance.interceptors.response.use((response) => {
   const { data } = response
