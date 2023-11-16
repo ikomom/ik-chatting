@@ -35,7 +35,9 @@ async function bootstrap() {
    * pipes
    */
   // 验证入参
-  app.useGlobalPipes(new ValidationPipe({}))
+  app.useGlobalPipes(new ValidationPipe({
+    transform: true,
+  }))
 
   // TODO: i18n https://nestjs-i18n.com/quick-start
   // TODO: rateLimit, compression

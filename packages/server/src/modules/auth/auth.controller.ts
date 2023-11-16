@@ -22,7 +22,7 @@ export class AuthController {
 
   @ApiOperation({ summary: 'batch register' })
   @Post('/register/batch')
-  createMany(@Body(new ParseArrayPipe({ items: BatchCreateDto })) users: string[]) {
-    return this.authService.batchRegister(users)
+  createMany(@Body('users', new ParseArrayPipe({ items: BatchCreateDto })) body: BatchCreateDto) {
+    return this.authService.batchRegister(body.users)
   }
 }

@@ -6,7 +6,7 @@ const msg = ref('')
 const totalUser = ref(0)
 const ff = ref({ a: 'b', b: { c: 'd' } })
 console.log('cloneDeep', cloneDeep(ff.value), ff.value)
-const socket = io('ws://localhost:3000')
+const socket = io('ws://localhost:3888')
 
 socket.on('welcome', (msg) => {
   console.log('hi', typeof msg)
