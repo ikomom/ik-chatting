@@ -15,6 +15,7 @@ export default defineConfig(({ mode }) => {
   return {
     envDir,
     server: {
+      port: 7999,
       proxy: {
         '/api': {
           target: env.VITE_APP_API_URL,

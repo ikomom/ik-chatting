@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { AuthModule } from './modules/auth/auth.module'
 import { UserModule } from './modules/user/user.module'
 import { AppController } from './app.controller'
+import { RoomsModule } from './modules/rooms/rooms.module'
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { AppController } from './app.controller'
       module: AuthModule,
       global: true,
     },
+    RoomsModule,
   ],
   controllers: [AppController],
 })
