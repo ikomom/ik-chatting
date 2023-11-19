@@ -2,40 +2,35 @@ import { defineStore } from 'pinia'
 import { Socket, io } from 'socket.io-client'
 import { useUserStore } from '@/stores/user'
 import { Rooms } from '@/stores/type'
+import { getAllRooms } from '@/apis/modules/room'
 
 export interface ChatState {
   socket?: Socket
   rooms: Rooms[]
-  activeRoom: string
+  activeRoom?: string
 }
 
 export const useChatStore = defineStore('chat', {
   state(): ChatState {
     return {
       socket: undefined,
-      activeRoom: '1',
-      rooms: [
-        {
-          id: '1',
-          roomName: '22xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-          avatar: 'https://07akioni.oss-cn-beijing.aliyuncs.com/07akioni.jpeg',
-          description: '什么都没有',
-        },
-        {
-          id: '2',
-          roomName: '22211xx消息',
-          avatar: 'https://gw.alipayobjects.com/zos/antfincdn/aPkFc8Sj7n/method-draw-image.svg',
-          description: 'ik: 什么都没有',
-        },
-      ],
+      activeRoom: undefined,
+      rooms: [],
     }
   },
   getters: {
-    activeRoomItem: (state) => {
-      return state.rooms.find(item => item.id === state.activeRoom)
+    activeRoomItem: (state): ChatState['rooms'][number] => {
+      return state.rooms.find(item => item.id === state.activeRoom) || state.rooms[0]
     },
   },
   actions: {
+    async init() {
+      const data = await getAllRooms()
+      this.$patch({
+        rooms: data,
+        activeRoom: data[0]?.id,
+      })
+    },
     connectSocket() {
       if (this.socket)
         this.socket.disconnect()
@@ -61,4 +56,5 @@ export const useChatStore = defineStore('chat', {
       })
     },
   },
+
 })

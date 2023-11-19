@@ -1,16 +1,22 @@
 <script setup lang="tsx">
 import type { DataTableColumns } from 'naive-ui'
 import dayjs from 'dayjs'
-import { deleteUser, getAllUser } from '@/apis'
+import { deleteRoom, getAllRooms } from '@/apis/modules/room'
 
-const { execute, state, isLoading } = useAsyncState(getAllUser, [])
+const { execute, state, isLoading } = useAsyncState(getAllRooms, [])
 
 const columns: DataTableColumns = [
   { title: 'id', key: 'id', width: 200, ellipsis: true },
-  { title: 'username', key: 'username' },
-  { title: 'status', key: 'status' },
-  { title: 'avatar', key: 'avatar' },
-  { title: 'tag', key: 'tag' },
+  { title: 'roomName', key: 'roomName' },
+  { title: 'description', key: 'description' },
+  {
+    title: 'avatar',
+    key: 'avatar',
+    ellipsis: true,
+    render({ avatar }) {
+      return avatar ? <n-avatar src={avatar} size="large"/> : null
+    },
+  },
   {
     title: 'createTime',
     key: 'createTime',
@@ -30,7 +36,7 @@ const columns: DataTableColumns = [
              on-click={() => {
                const bool = confirm('delete')
                if (bool) {
-                 deleteUser(row.id as string).then(() => {
+                 deleteRoom(row.id as string).then(() => {
                    execute()
                  })
                }
@@ -48,7 +54,7 @@ const columns: DataTableColumns = [
 <template>
   <div flex="~ col">
     <div mb-2>
-      User
+      Rooms
       <n-space justify="end">
         <n-button type="primary" :loading="isLoading" @click="execute()">
           refresh

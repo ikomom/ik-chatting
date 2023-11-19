@@ -20,7 +20,7 @@ export const useUserStore = defineStore('user', {
           userInfo: data.user,
           token: data.token as any,
         })
-        this.$router.push('/')
+        this.$router.replace('/')
       }
     },
     // TODO: 后端退出
@@ -33,7 +33,7 @@ export const useUserStore = defineStore('user', {
       if (msg)
         showMessage({ content: msg })
 
-      this.$router.push('/login')
+      this.$router.replace('/login')
     },
   },
 })

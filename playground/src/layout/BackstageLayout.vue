@@ -1,11 +1,16 @@
 <script setup lang="tsx">
 import type { MenuOption } from 'naive-ui'
 import type { RouteRecordRaw } from 'vue-router'
-import { RouterLink } from 'vue-router'
+import { RouterLink, useRoute } from 'vue-router'
 import { backStageRoute } from '@/router/routes'
 import { toggleDark } from '@/utils/utils'
 
+const route = useRoute()
 const selectedKey = ref()
+
+watchEffect(() => {
+  selectedKey.value = route.name
+})
 
 function toMenuOptions(routes: RouteRecordRaw[], source: MenuOption[]) {
   routes.forEach((route) => {
@@ -18,8 +23,8 @@ function toMenuOptions(routes: RouteRecordRaw[], source: MenuOption[]) {
         _item.label = route.meta!.title
         _item.children = []
         toMenuOptions(route.children, _item.children)
-        if (!selectedKey.value)
-          selectedKey.value = _item.children[0].key
+        // if (!selectedKey.value)
+        //   selectedKey.value = _item.children[0].key
       }
       source.push(_item)
     }

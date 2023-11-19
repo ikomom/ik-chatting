@@ -4,6 +4,7 @@ import { AuthModule } from './modules/auth/auth.module'
 import { UserModule } from './modules/user/user.module'
 import { AppController } from './app.controller'
 import { RoomsModule } from './modules/rooms/rooms.module'
+import { MessageModule } from './modules/message/message.module'
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { RoomsModule } from './modules/rooms/rooms.module'
       global: true,
     },
     RoomsModule,
+    MessageModule,
   ],
   controllers: [AppController],
 })

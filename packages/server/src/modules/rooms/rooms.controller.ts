@@ -21,7 +21,7 @@ export class RoomsController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.roomsService.findOne(+id)
+    return this.roomsService.findOne(id)
   }
 
   @Patch(':id')
@@ -31,6 +31,6 @@ export class RoomsController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.roomsService.remove(+id)
+    return this.roomsService.remove(id)
   }
 }

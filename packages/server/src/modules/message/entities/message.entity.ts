@@ -1,18 +1,18 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
 @Entity()
-export class Room {
+export class Message {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
-  @Column()
-  avatar: string
+  @Column({ default: '' })
+  content: string
 
   @Column()
-  roomName: string
+  userId: string
 
   @Column()
-  description: string
+  roomId: string
 
   @Column({ type: 'double', default: new Date().valueOf() })
   createTime: number

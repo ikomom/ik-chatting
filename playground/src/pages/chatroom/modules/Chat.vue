@@ -8,16 +8,14 @@ const { activeRoomItem } = storeToRefs(useChatStore())
 <template>
   <div flex="~ col" px-4 py-2>
     <div class="flex-1">
-      <div mb-4>
-        {{ activeRoomItem.title }}
+      <div v-if="activeRoomItem" mb-4>
+        {{ activeRoomItem.roomName }}
       </div>
       <div>
         sss
       </div>
     </div>
-    <div rounded="2" contenteditable h-20 b-1 p-2>
-      <n-scrollbar>1</n-scrollbar>
-    </div>
+    <n-input type="textarea" :resizable="false" style="--n-color: transparent;--n-color-focus: transparent;" />
   </div>
 </template>
 

@@ -11,7 +11,7 @@ import { ALL_ROUTES } from '@/router/routes'
       <div v-if="route.children?.length" class="bg-yellow p-3">
         <p>Children</p>
         <router-link v-for="(item, idx) in route.children" :key="idx" class="color-blue" :to="{ name: item.name }">
-          {{ item.name }}
+          {{ item.name }} <br>
         </router-link>
       </div>
     </n-card>

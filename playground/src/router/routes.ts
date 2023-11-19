@@ -2,20 +2,28 @@ import type { RouteRecordRaw } from 'vue-router'
 
 export const backStageRoute: RouteRecordRaw[] = [
   {
-    name: 'backStage',
-    path: '/backStage',
+    name: 'backstage',
+    path: '/backstage',
     component: () => import('@/layout/BackstageLayout.vue'),
     meta: {
       title: '后台',
     },
     children: [
       {
-        name: 'backStageUser',
+        name: 'backstage-user',
         path: 'user',
         meta: {
           title: '用户管理',
         },
         component: () => import('@/pages/backstage/user/index.vue'),
+      },
+      {
+        name: 'backstage-rooms',
+        path: 'rooms',
+        meta: {
+          title: '房间管理',
+        },
+        component: () => import('@/pages/backstage/rooms/index.vue'),
       },
     ],
   },
