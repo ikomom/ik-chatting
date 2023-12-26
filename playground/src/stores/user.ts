@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { UserInfo, login } from '@/apis'
 import { showMessage } from '@/utils/message'
+import { sleep } from '@/utils/utils'
 
 export interface UserState {
   userInfo: Record<string, unknown>
@@ -20,11 +21,11 @@ export const useUserStore = defineStore('user', {
           userInfo: data.user,
           token: data.token as any,
         })
-        this.$router.replace('/')
+        await this.$router.replace('/')
       }
     },
     // TODO: 后端退出
-    async logout(msg?: string) {
+    async logout(msg = '登出成功') {
       this.$patch({
         userInfo: {},
         token: undefined,
@@ -33,7 +34,11 @@ export const useUserStore = defineStore('user', {
       if (msg)
         showMessage({ content: msg })
 
-      this.$router.replace('/login')
+      await sleep(300)
+      await this.$router.replace('/login')
     },
+  },
+  persist: {
+    enabled: true,
   },
 })

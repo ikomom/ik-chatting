@@ -4,8 +4,10 @@ import type { RouteRecordRaw } from 'vue-router'
 import { RouterLink, useRoute } from 'vue-router'
 import { backStageRoute } from '@/router/routes'
 import { toggleDark } from '@/utils/utils'
+import { useUserStore } from '@/stores/user'
 
 const route = useRoute()
+const { logout } = useUserStore()
 const selectedKey = ref()
 
 watchEffect(() => {
@@ -52,6 +54,12 @@ toMenuOptions(backStageRoute, menuOptions)
           <button icon-btn @click="toggleDark()">
             <div dark:i-carbon-moon i-carbon-sun />
           </button>
+          <n-popconfirm :show-icon="false" @positive-click="logout()">
+            <template #trigger>
+              <a i-carbon-close-filled icon-btn hover:color-red />
+            </template>
+            确认登出?
+          </n-popconfirm>
         </div>
       </div>
     </n-layout-header>

@@ -11,7 +11,7 @@ const { activeRoomItem } = storeToRefs(useChatStore())
       <div v-if="activeRoomItem" mb-4>
         {{ activeRoomItem.roomName }}
       </div>
-      <div>
+      <div b-1>
         sss
       </div>
     </div>

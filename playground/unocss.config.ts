@@ -22,7 +22,6 @@ export default defineConfig({
     presetIcons(),
     // presetUno(),
     presetWind({
-
     }),
   ],
   transformers: [

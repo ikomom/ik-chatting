@@ -13,11 +13,13 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "nest-knife4j": "^1.0.1"
+    "nest-knife4j": "^1.0.1",
+    "serialize-javascript": "^6.0.1"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.39.0",
     "@antfu/utils": "^0.7.3",
+    "@types/serialize-javascript": "^5.0.4",
     "@types/node": "^14.14.31",
     "bumpp": "^8.2.1",
     "cross-env": "^7.0.3",
@@ -26,6 +28,7 @@
     "pnpm": "^7.12.0",
     "rimraf": "^3.0.2",
     "typescript": "^4.8.3",
+    "type-fest": "^4.8.3",
     "vite": "^4.3.9",
     "vite-plugin-inspect": "^0.7.26",
     "vitest": "^0.31.1"

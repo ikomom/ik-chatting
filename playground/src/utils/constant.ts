@@ -4,7 +4,9 @@ type ToPropertyPrefix<N extends string = ''> = N extends '' ? '' : `${N}_`
 
 type ToProperty<Property extends string, N extends string = ''> = `${ToPropertyPrefix<N>}${Property}`
 
-type ToSingleKeyMap<T extends Record<PropertyKey, any>, K extends keyof T> = T extends {
+type ProperItem = Record<PropertyKey, any>
+
+type ToSingleKeyMap<T extends ProperItem, K extends keyof T> = T extends {
   readonly [Z in K]: infer F;
 }
   ? K extends PropertyKey
@@ -18,16 +20,18 @@ type ToSingleKeyMap<T extends Record<PropertyKey, any>, K extends keyof T> = T e
 
 type MergeIntersection<A> = A extends infer T ? { [Key in keyof T]: T[Key] } : never
 
-type ToKeyMap<T extends Readonly<Record<PropertyKey, any>[]>, K extends keyof T[number]> = T extends readonly [
-  infer A extends Record<PropertyKey, any>,
+type ToKeyMap<T extends Readonly<ProperItem[]>, K extends keyof T[number]> = T extends readonly [
+  infer A extends ProperItem,
   ...infer B,
 ]
   ? B['length'] extends 0
     ? ToSingleKeyMap<A, K>
-    : MergeIntersection<ToSingleKeyMap<A, K> & ToKeyMap<B, K>>
-  : []
+    : B extends ProperItem[]
+      ? MergeIntersection<ToSingleKeyMap<A, K> & ToKeyMap<B, K>>
+      : ProperItem
+  : ProperItem
 
-type ToSingleKeyValue<T extends Record<PropertyKey, any>, K extends keyof T, KA extends keyof T = never> = T extends {
+type ToSingleKeyValue<T extends ProperItem, K extends keyof T, KA extends keyof T = never> = T extends {
   readonly [Z in K]: infer F;
 }
   ? F extends PropertyKey
@@ -39,10 +43,12 @@ type ToSingleKeyValue<T extends Record<PropertyKey, any>, K extends keyof T, KA 
 
 type ToKeyValue<
   T extends ReadonlyArray<Record<PropertyKey, any>>, K extends keyof T[number], KA extends keyof T[number] = never,
-> = T extends readonly [infer A, ...infer B]
+> = T extends readonly [infer A extends ProperItem, ...infer B]
   ? B['length'] extends 0
     ? ToSingleKeyValue<A, K, KA>
-    : MergeIntersection<ToSingleKeyValue<A, K, KA> & ToKeyValue<B, K, KA>>
+    : B extends ProperItem[]
+      ? MergeIntersection<ToSingleKeyValue<A, K, KA> & ToKeyValue<B, K, KA>>
+      : ProperItem
   : []
 
 export function defineConstants<
@@ -56,14 +62,14 @@ export function defineConstants<
     [namespace]: list.reduce(
       (obj, item) => ({
         ...obj,
-        [snakeCase(item[keyAlias] as string).toUpperCase()]: item[key],
+        [snakeCase(item[keyAlias!] as string).toUpperCase()]: item[key],
       }),
       {},
     ),
     [`${prefix}MAP`]: list.reduce(
       (obj, item) => ({
         ...obj,
-        [item[keyAlias] as string]: item,
+        [item[keyAlias!] as string]: item,
       }),
       {},
     ),
@@ -78,3 +84,14 @@ export function defineConstants<
     }
   >
 }
+/*
+const a = defineConstants(
+  [
+    { key: 1, value: '22' },
+    { key: '21', value: '22' },
+  ] as const,
+  'name',
+  'key',
+  'key',
+)
+*/
