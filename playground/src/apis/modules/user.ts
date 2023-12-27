@@ -1,7 +1,10 @@
-export function getAllUser() {
-  return request({
+import { UserInfo } from '@/stores/type'
+
+export async function getAllUser() {
+  const res = await request({
     url: '/user',
-  }).then(res => res.data)
+  })
+  return res.data
 }
 export function deleteUser(id: string) {
   return request({
@@ -10,12 +13,12 @@ export function deleteUser(id: string) {
   })
 }
 
-export interface UserInfo {
+export interface UserInfoReq {
   password: string
   username: string
 }
 
-export function register(userInfo: UserInfo) {
+export function register(userInfo: UserInfoReq) {
   return request({
     method: 'post',
     url: '/auth/register',
@@ -24,11 +27,11 @@ export function register(userInfo: UserInfo) {
 }
 
 export interface LoginResponse {
-  user: any
+  user: UserInfo
   token: string
 }
 
-export function login(userInfo: UserInfo) {
+export function login(userInfo: UserInfoReq) {
   return request<LoginResponse>({
     method: 'post',
     url: '/auth/login',

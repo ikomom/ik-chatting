@@ -1,36 +1,36 @@
 <script setup lang="ts">
 import { useChatStore } from '@/stores/chat'
+import ChatItem from '@/components/ChatItem.vue'
 
 const chatStore = useChatStore()
+
+function onChangeRoom(roomId: string) {
+  chatStore.activeRoom = roomId
+  chatStore.getRoomMessage({
+    roomId,
+    page: 1,
+    pageSize: 10,
+  })
+}
 </script>
 
 <template>
   <div px-2 py-3>
     <n-scrollbar>
-      <div
+      <ChatItem
         v-for="item in chatStore.rooms"
         :key="item.id"
-        flex="~ gap-3"
         :class="[item.id === chatStore.activeRoom ? 'bg-pink' : '']"
         m="b-3"
         cursor-pointer
         select-none
-        px-2
-        py-1
         rounded="2"
         hover="op-80"
-        @click="chatStore.activeRoom = item.id"
-      >
-        <n-avatar size="large" flex-shrink-0 :src="item.avatar" />
-        <div class="flex-1" truncate>
-          <div truncate>
-            {{ item.roomName }}
-          </div>
-          <div truncate op50>
-            {{ item.description }}
-          </div>
-        </div>
-      </div>
+        :title="item.roomName"
+        :avatar="item.avatar"
+        :description="item.description"
+        @click="onChangeRoom(item.id)"
+      />
     </n-scrollbar>
   </div>
 </template>

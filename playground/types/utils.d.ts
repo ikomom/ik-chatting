@@ -9,3 +9,11 @@ declare module Utils {
   type ConstructorParameters<T extends abstract new (...args: any) => any> = T extends abstract new (...args: infer P) => any ? P : never;
 
 }
+
+
+declare module API {
+  export interface Offset {
+    page: number
+    pageSize: number
+  }
+}

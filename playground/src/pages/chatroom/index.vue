@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import { useChatStore } from '@/stores/chat'
 import Rooms from '@/pages/chatroom/modules/Rooms.vue'
 import Chat from '@/pages/chatroom/modules/Chat.vue'
-import { useChatStore } from '@/stores/chat'
 
 const chart = useChatStore()
 chart.init()

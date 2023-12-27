@@ -1,24 +1,30 @@
 import { defineStore } from 'pinia'
-import { UserInfo, login } from '@/apis'
+import { UserInfoReq, login } from '@/apis'
 import { showMessage } from '@/utils/message'
 import { sleep } from '@/utils/utils'
+import { UserInfo } from '@/stores/type'
 
 export interface UserState {
-  userInfo: Record<string, unknown>
+  userInfo?: UserInfo
   token?: string
 }
 
 export const useUserStore = defineStore('user', {
   state: (): UserState => ({
-    userInfo: {},
+    userInfo: undefined,
     token: undefined,
   }),
+  getters: {
+    userId(state): string {
+      return state.userInfo ? state.userInfo.id : ''
+    },
+  },
   actions: {
-    async login(userInfo: UserInfo) {
+    async login(userInfo: UserInfoReq) {
       const { code, data } = await login(userInfo)
       if (code === 200) {
         this.$patch({
-          userInfo: data.user,
+          userInfo: data.user || {},
           token: data.token as any,
         })
         await this.$router.replace('/')
@@ -27,7 +33,7 @@ export const useUserStore = defineStore('user', {
     // TODO: 后端退出
     async logout(msg = '登出成功') {
       this.$patch({
-        userInfo: {},
+        userInfo: undefined,
         token: undefined,
       })
 

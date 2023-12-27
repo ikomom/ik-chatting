@@ -37,18 +37,19 @@ export class MessageService {
     page: number,
     pageSize: number,
   ) {
-    const messages = this.messageRepository
+    const messages = await this.messageRepository
       .createQueryBuilder('message')
       .orderBy('message.createTime', 'DESC')
       .where('message.roomId=:id', { id: roomId })
       .getMany()
 
-    return messages
     // .andWhere('message.createTime >= :createTime', {
-    //   createTime:
+    //   createTime:createTime - defaultGroupMessageTime // 新用户进群默认可以看群近24小时消息
     // })
     // .skip(page)
     // .take(pageSize)
+    // TODO: 分页
+    return R.ok('ok', messages)
   }
 
   update(id: number, updateMessageDto: UpdateMessageDto) {
