@@ -9,3 +9,7 @@ INSERT INTO `chatting`.`message` (`id`, `content`, `userId`, `roomId`, `createTi
 INSERT INTO `chatting`.`message` (`id`, `content`, `userId`, `roomId`, `createTime`) VALUES ('2', '我是JOJO', 'f7c06673-cdc0-415f-a284-ba47fb641884', '1', 1693194066969);
 INSERT INTO `chatting`.`message` (`id`, `content`, `userId`, `roomId`, `createTime`) VALUES ('3', '你好', 'f8e71e0b-dbfc-4ae2-82be-3db5af3246b8', '1', 1693199630718);
 INSERT INTO `chatting`.`message` (`id`, `content`, `userId`, `roomId`, `createTime`) VALUES ('4', '天气不错', 'f8e71e0b-dbfc-4ae2-82be-3db5af3246b8', '1', 1693200027432);
+
+INSERT INTO `chatting`.`message` (`id`, `content`, `userId`, `roomId`, `createTime`) VALUES ('5', '6', 'f7c06673-cdc0-415f-a284-ba47fb641884', '1', CURRENT_TIMESTAMP);
+INSERT INTO `chatting`.`message` (`id`, `content`, `userId`, `roomId`, `createTime`) VALUES ('7', '不如', 'f8e71e0b-dbfc-4ae2-82be-3db5af3246b8', '1', CURRENT_TIMESTAMP);
+INSERT INTO `chatting`.`message` (`id`, `content`, `userId`, `roomId`, `createTime`) VALUES ('8', '原神', 'f8e71e0b-dbfc-4ae2-82be-3db5af3246b8', '1', CURRENT_TIMESTAMP);
