@@ -21,14 +21,14 @@ function onScroll(evt: Event) {
 </script>
 
 <template>
-  {{ x }} {{ y }}
+  <!--  {{ x }} {{ y }} -->
   <n-scrollbar id="message-content" @scroll="onScroll">
     <ChatItem
       v-for="msg in messages"
       :key="msg.id"
-      :title="msg.userId"
+      :title="msg.username"
       :description="msg.content"
-      :avatar="msg.userId"
+      :avatar="msg.avatar"
       :reverse="userId === msg.userId"
     />
   </n-scrollbar>

@@ -16,4 +16,9 @@ declare module API {
     page: number
     pageSize: number
   }
+
+  export interface List<T> extends Offset {
+    total: number,
+    list: T[]
+  }
 }

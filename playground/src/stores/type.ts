@@ -17,7 +17,8 @@ export interface UserInfo extends BasicType {
 }
 
 export interface RoomMessages extends BasicType {
-  userId: string
-  roomId: string
   content: string
+  avatar: string
+  username: string
+  userId: string
 }

@@ -20,7 +20,7 @@ export class RoomsService {
   }
 
   async findAll() {
-    const data = await this.roomRepository.find({ order: { createTime: 'DESC' } })
+    const data = await this.roomRepository.find({ order: { createTime: 'ASC' } })
     return R.ok('ok', data)
   }
 

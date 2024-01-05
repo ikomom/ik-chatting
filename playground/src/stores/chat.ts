@@ -43,9 +43,8 @@ export const useChatStore = defineStore('chat', {
       }
     },
     async getRoomMessage(msgData: Omit<RoomMessageData, 'userId'>) {
-      const { userId } = useUserStore()
-      const { data } = await getRoomMessage({ ...msgData, userId })
-      this.roomMessageMap[msgData.roomId] = data
+      const { data } = await getRoomMessage({ ...msgData })
+      this.roomMessageMap[msgData.roomId] = data.list
     },
     connectSocket() {
       if (this.socket)

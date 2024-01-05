@@ -39,7 +39,7 @@ export class AuthService {
       username: user.username,
       password: md5(user.password),
       role: 'user',
-      avatar: `avatar${Math.round(Math.random() * 19 + 1)}.png`,
+      avatar: `https://i.pravatar.cc/150?u=${user.username}`,
     })
     return R.ok('注册成功', null)
   }

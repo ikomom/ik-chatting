@@ -23,7 +23,7 @@ withDefaults(
       <div v-if="title" truncate>
         {{ title }}
       </div>
-      <div v-if="description" truncate op50>
+      <div v-if="description" truncate op60>
         {{ description }}
       </div>
       <slot v-else name="description" />

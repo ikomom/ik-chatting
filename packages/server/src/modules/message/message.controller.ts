@@ -27,13 +27,11 @@ export class MessageController {
 
   @Post('/roomMessage')
   roomMessage(
-    @Body('userId') userId: string,
     @Body('roomId') roomId: string,
     @Body('page') page: number,
     @Body('pageSize') pageSize: number,
   ) {
     return this.messageService.roomMessage(
-      userId,
       roomId,
       page,
       pageSize,
