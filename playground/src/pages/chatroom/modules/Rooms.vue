@@ -6,11 +6,11 @@ const chatStore = useChatStore()
 
 function onChangeRoom(roomId: string) {
   chatStore.activeRoom = roomId
-  chatStore.getRoomMessage({
-    roomId,
-    page: 1,
-    pageSize: 10,
-  })
+  // chatStore.getRoomMessage({
+  //   roomId,
+  //   page: 1,
+  //   pageSize: 10,
+  // })
 }
 </script>
 

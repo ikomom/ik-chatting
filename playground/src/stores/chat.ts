@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
 import { Socket, io } from 'socket.io-client'
 import { useUserStore } from '@/stores/user'
-import { RoomMessages, Rooms } from '@/stores/type'
+import { ChatMessage, RoomMessages, Rooms } from '@/stores/type'
 import { getAllRooms } from '@/apis/modules/room'
 import { RoomMessageData, getRoomMessage } from '@/apis/modules/message'
 
@@ -35,16 +35,17 @@ export const useChatStore = defineStore('chat', {
           rooms: data,
           activeRoom: activeRoomId,
         })
-        await this.getRoomMessage({
-          roomId: activeRoomId,
-          pageSize: 10,
-          page: 1,
-        })
+        // await this.getRoomMessage({
+        //   roomId: activeRoomId,
+        //   pageSize: 10,
+        //   page: 1,
+        // })
       }
     },
     async getRoomMessage(msgData: Omit<RoomMessageData, 'userId'>) {
       const { data } = await getRoomMessage({ ...msgData })
-      this.roomMessageMap[msgData.roomId] = data.list
+      // this.roomMessageMap[msgData.roomId] = data.list
+      return data
     },
     connectSocket() {
       if (this.socket)
@@ -70,6 +71,13 @@ export const useChatStore = defineStore('chat', {
           socket.emit('chatData', token)
           // 先保存好socket对象
           this.$patch({ socket })
+        })
+      }
+    },
+    sendMessage(msg: ChatMessage) {
+      if (this.socket) {
+        this.socket.emit('message', {
+
         })
       }
     },

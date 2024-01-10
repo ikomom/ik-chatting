@@ -42,7 +42,7 @@ export class MessageService {
       // .innerJoinAndSelect(Room, 'room', 'room.id=:id', { id: roomId })
       .innerJoinAndSelect(User, 'user', 'msg.userId=user.id && msg.roomId=:roomId', { roomId })
       .select('msg.id,msg.userId,user.username,user.avatar,msg.content,msg.createTime')
-      .orderBy('msg.createTime', 'ASC')
+      .orderBy('msg.createTime', 'DESC')
 
     const messages = await builder
       // .take(page)
@@ -52,13 +52,13 @@ export class MessageService {
       .getRawMany()
     const total = await builder.getCount()
 
-    console.log('builder', builder.getSql())
-    console.log('total: ', total)
+    console.log(builder.getSql())
+    // console.log('total: ', total)
     // .andWhere('message.createTime >= :createTime', {
     //   createTime:createTime - defaultGroupMessageTime // 新用户进群默认可以看群近24小时消息
     // })
     return R.ok('ok', {
-      list: messages,
+      list: messages.reverse(),
       page,
       pageSize,
       total,

@@ -22,3 +22,18 @@ export interface RoomMessages extends BasicType {
   username: string
   userId: string
 }
+// 消息类型
+export enum MessageType {
+  text = 'text',
+  image = 'image',
+  file = 'file',
+  video = 'video',
+}
+export interface ChatMessage {
+  type: 'friend' | 'group'
+  message: string | File
+  width?: number
+  height?: number
+  messageType: MessageType
+  size?: number // 附件大小
+}

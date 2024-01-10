@@ -20,7 +20,7 @@ chart.init()
       class="grass"
     >
       <Rooms w-60 b="r-1" />
-      <Chat flex-1 />
+      <Chat v-if="chart.activeRoom" flex-1 />
     </div>
   </div>
 </template>

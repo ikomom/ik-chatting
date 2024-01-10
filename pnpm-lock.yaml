@@ -196,6 +196,18 @@ importers:
 
   playground:
     dependencies:
+      '@better-scroll/core':
+        specifier: ^2.5.1
+        version: 2.5.1
+      '@better-scroll/mouse-wheel':
+        specifier: ^2.5.1
+        version: 2.5.1
+      '@better-scroll/pull-down':
+        specifier: ^2.5.1
+        version: 2.5.1
+      '@better-scroll/pull-up':
+        specifier: ^2.5.1
+        version: 2.5.1
       axios:
         specifier: ^1.6.5
         version: 1.6.5
@@ -1061,6 +1073,34 @@ packages:
   /@bcoe/v8-coverage@0.2.3:
     resolution: {integrity: sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==}
     dev: true
+
+  /@better-scroll/core@2.5.1:
+    resolution: {integrity: sha512-koKOuYA55dQ04FJRIVUpMGDr1hbCfWmfX0MGp1hKagkQSWSRpwblqACiwtggVauoj9aaJRJZ9hDsTM4weaavlg==}
+    dependencies:
+      '@better-scroll/shared-utils': 2.5.1
+    dev: false
+
+  /@better-scroll/mouse-wheel@2.5.1:
+    resolution: {integrity: sha512-DGnrirRMY6zMM7xwgx09D/cA9A//3J1/uDkq8iBVEyE5p0sEr/keQpjEfFHGkBRa505BnbBwdbN6f5lugEDSPw==}
+    dependencies:
+      '@better-scroll/core': 2.5.1
+    dev: false
+
+  /@better-scroll/pull-down@2.5.1:
+    resolution: {integrity: sha512-Y6XcGu2NlevPg3k9VBRRFvpmfoTA+rO96JGdog2qKHclIPNXnsVwsIHtZfAm9weE/f9UuC4BnB+VUFRlucfupg==}
+    dependencies:
+      '@better-scroll/core': 2.5.1
+    dev: false
+
+  /@better-scroll/pull-up@2.5.1:
+    resolution: {integrity: sha512-1hu3xSMxdB8T391KffpNZ7g93lMwZEHjfb1F1Y4KvIkciDt8nXqkGpqrZF+YwR+EJTgYcWqUO8kgmI6XXu7Pkg==}
+    dependencies:
+      '@better-scroll/core': 2.5.1
+    dev: false
+
+  /@better-scroll/shared-utils@2.5.1:
+    resolution: {integrity: sha512-AplkfSjXVYP9LZiD6JsKgmgQJ/mG4uuLmBuwLz8W5OsYc7AYTfN8kw6GqZ5OwCGoXkVhBGyd8NeC4xwYItp0aw==}
+    dev: false
 
   /@colors/colors@1.5.0:
     resolution: {integrity: sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==}
