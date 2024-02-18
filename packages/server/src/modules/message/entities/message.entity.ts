@@ -1,7 +1,8 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
+import { BasicEntity } from '../../../common/entity/basic.entity'
 
 @Entity('message')
-export class Message {
+export class Message extends BasicEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -13,7 +14,4 @@ export class Message {
 
   @Column()
   roomId: string
-
-  @Column({ type: 'double', default: new Date().valueOf() })
-  createTime: number
 }

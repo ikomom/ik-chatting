@@ -1,7 +1,11 @@
 import { HttpException, HttpStatus } from '@nestjs/common'
 
 class R {
-  static ok<T = any>(message = '', data: T = null, code = HttpStatus.OK) {
+  static ok<T = any>(message = '', data: T = null) {
+    return R.data(message, data, HttpStatus.OK)
+  }
+
+  static data<T = any>(message = '', data: T = null, code: HttpStatus) {
     return { code, data, msg: message, t: new Date().getTime() }
   }
 

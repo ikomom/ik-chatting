@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { HttpStatus, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import R from '../../common/tools/response'
@@ -22,11 +22,13 @@ export class UserService {
     const data = await this.userRepository.findOne({ where: { id } })
     if (data)
       return R.ok('ok', data)
-    return R.fail('未找到id')
+    throw R.fail('未找到id', HttpStatus.NOT_FOUND)
   }
 
-  update(id: string, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`
+  async update(id: string, updateUserDto: UpdateUserDto) {
+    await this.findOne(id)
+    await this.userRepository.update(id, updateUserDto)
+    return R.ok('修改成功')
   }
 
   async remove(id: string) {

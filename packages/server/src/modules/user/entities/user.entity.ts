@@ -1,8 +1,9 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm'
 import { md5 } from '../../../common/tools/utils'
+import { BasicEntity } from '../../../common/entity/basic.entity'
 
 @Entity('user')
-export class User {
+export class User extends BasicEntity {
   @PrimaryGeneratedColumn('uuid')
   id: string
 
@@ -15,7 +16,7 @@ export class User {
   @Column({ default: 'on' })
   status: string
 
-  @Column({ default: 'avatar1.png' })
+  @Column({ default: '' })
   avatar: string
 
   @Column({ default: '' })
@@ -23,7 +24,4 @@ export class User {
 
   @Column({ default: 'user' })
   role: string
-
-  @Column({ type: 'double', default: new Date().valueOf() })
-  createTime: number
 }

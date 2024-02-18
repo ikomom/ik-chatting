@@ -4,6 +4,7 @@ import { knife4jSetup } from 'nest-knife4j'
 import { ValidationPipe } from '@nestjs/common'
 import { AppModule } from './app.module'
 import { HttpExceptionFilter } from './common/filters/httpException.filter'
+import { TypeormExceptionFilter } from './common/filters/typeormException.filter'
 
 const port = 8000
 async function bootstrap() {
@@ -31,12 +32,18 @@ async function bootstrap() {
    */
   // 格式化错误
   app.useGlobalFilters(new HttpExceptionFilter())
+  app.useGlobalFilters(new TypeormExceptionFilter())
   /**
    * pipes
    */
   // 验证入参
   app.useGlobalPipes(new ValidationPipe({
+    // 自动转换类型
     transform: true,
+    // 自动去除dto无注解的属性
+    whitelist: true,
+    // 传多余的属性会报错
+    forbidNonWhitelisted: false,
   }))
 
   // TODO: i18n https://nestjs-i18n.com/quick-start
