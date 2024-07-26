@@ -62,6 +62,9 @@ export const useChatStore = defineStore('chat', {
             userId: userInfo.id,
           },
         })
+        socket.onAny((event, ...args) => {
+          console.warn('onAny', event, args)
+        })
         socket.on('unauthorized', (msg: string) => {
           logout(msg)
         })

@@ -4,7 +4,7 @@ import { ALL_ROUTES } from '@/router/routes'
 
 <template>
   <div class="p4">
-    <n-card v-for="(route, i) in ALL_ROUTES" :key="i" :title="route.name" class="mb-4 shadow-md">
+    <n-card v-for="(route, i) in ALL_ROUTES" :key="i" :title="route.name as string" class="mb-4 shadow-md">
       <router-link class="color-blue" :to="route.path">
         {{ route.name }}
       </router-link>

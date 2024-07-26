@@ -48,6 +48,14 @@ export const ALL_ROUTES: RouteRecordRaw[] = [
     name: 'Auth',
     component: () => import('@/pages/auth/index.vue'),
   },
+  {
+    path: '/socket-test',
+    name: 'SocketTest',
+    meta: {
+      skipAuth: true,
+    },
+    component: () => import('@/pages/socket-test/index.vue'),
+  },
   ...chatroomRoute,
   ...backStageRoute,
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/pages/404.vue') },

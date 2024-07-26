@@ -1,5 +1,6 @@
 const http = require('node:http')
 const express = require('express')
+const duckdb = require('duckdb')
 
 const cors = require('cors')
 
@@ -13,7 +14,11 @@ app.use(cors())
 app.get('/', (req, res) => {
   res.send('hello word')
 })
+
 const map = new Map()
+const socketData = {
+  chatList: [],
+}
 
 const io = new Server(server, { cors: { origin: '*' } })
 

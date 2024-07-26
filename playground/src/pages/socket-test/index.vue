@@ -9,7 +9,7 @@ console.log('cloneDeep', cloneDeep(ff.value), ff.value)
 const socket = io('ws://localhost:3888')
 
 socket.on('welcome', (msg) => {
-  console.log('hi', typeof msg)
+  console.log('hi', msg)
   totalUser.value = msg
 })
 
@@ -19,7 +19,7 @@ socket.on('server-res', (...msg) => {
 
 function sendMsg() {
   console.log('msg', msg.value)
-  socket.timeout(2000).emit('chat-message', msg.value, (...response: any) => {
+  socket.emit('chat-message', msg.value, (...response: any) => {
     console.log(response) // ok
   })
   msg.value = ''

@@ -32,7 +32,7 @@ router.beforeEach(async (to, from) => {
   const { token } = useUserStore()
   console.log('beforeEach', { to, from, token })
 
-  if (!token && to.name !== 'Auth')
+  if (!to.meta.skipAuth && !token && to.name !== 'Auth')
     return { name: 'Auth' }
 })
 
